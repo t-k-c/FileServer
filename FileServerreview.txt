@@ -1,0 +1,17 @@
+reviews!!!File Server
+          uploading files
+          the remaining pages (ABOUT,HELP,Settings should take action.....);
+*********************************************************************************constant check for accesibility of drives
+*********************************************************************************music files.....extension
+problem with file renaming....
+Pasting of files
+Downloading of multiple files
+Go detaily into files with restricted access like F:/Recovery...
+                                                     Ip addresses and their interfaces....
+                                                     **********************************************************************************Make the audio and video player draggable...
+                                                     **********************************************************************************music files icon
+=================================================================================
+**********************************************************************************Drives should have but a refresh button which will refresh all plus accessibility
+=================================================================================
+
+**********************************************************************************mistakes made in opening a directory confused with loadDrives();  //Version Beta

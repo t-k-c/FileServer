@@ -1,0 +1,5 @@
+line 1 : 1 or 0 for R/W access (1:Read, 0: Write)
+line 2 : 1 or Zero for login password
+line 3 : password should be read if line 2 contains a 1
+line 4 : 1 or zero for custom port
+line 5 : custom port should be read if line 4 contains a 1

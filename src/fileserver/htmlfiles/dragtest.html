@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" onmousedown="getCoordinate()" ondrag="drag()" ondragend="end()" >
+<head>
+    <meta charset="UTF-8">
+    <script src="stuff/js/jquery.min.js"></script>
+    <title>Title</title>
+    <style>
+        html,body{
+            height:100%;
+            width: 100%;
+
+        }
+    </style>
+</head>
+<body >
+<div class="cover" style="position:absolute;border:1px solid red;background-color: rgba(255,0,0,0.2);width: 5px;height: 5px;" onmousedown="getCoordinate()" ondrag="drag()" ></div>
+
+</body>
+</html>
+<script>
+    var x=0;
+    var y=0;
+   function getCoordinate(){
+        x=event.pageX;
+       y=event.pageY;
+       $('.cover').css("left",x);
+       $('.cover').css("top",y);
+   }
+    function drag(){
+        event.preventDefault();
+       $('.indicator').text("dr");
+        if(x<event.pageX)
+             $('.cover').width(event.pageX-x);
+        else {
+            $('.cover').width(x - event.pageX);
+            $('.cover').css('left',event.pageX);
+        }
+        if(y<event.pageY)
+             $('.cover').height(event.pageY-y);
+        else{
+            $('.cover').height(y-event.pageY);
+            $('.cover').css('top',event.pageY);
+    }}
+    function end(){    $('.cover').width(5).height(5);
+$('.indicator').text("end");
+
+    }
+</script>

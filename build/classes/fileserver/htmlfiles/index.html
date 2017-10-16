@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+<head>
+<link rel="stylesheet" href="stuff/css/frwrkMlise.css" type="text/css"/>
+<link href="stuff/css/FileServerSyle.css" rel="stylesheet" type="text/css"/>
+    <script src="stuff/js/jquery.min.js"></script>
+    <script src="stuff/js/jquery-ui.min.js"></script>
+    <script src="stuff/js/frwrkMlise.js"></script>
+    <script src="stuff/js/OgJs.js"></script>
+    <title>File Server</title>
+</head>
+<body>
+<div class="loader">
+    <div style="margin-top: 20%;"><center><h1><span style="color:#1a237e;font-style: italic;">File</span><span style="color:#eee!important;">Server</span></h1><p>Powered By tkctechnologies</p><p id="loading">reading configuration ....</p>
+    <div class="input-field " id="passfield" hidden>
+        <input type="text" id="passwordPlace" onkeydown="validatePass(event,this)">
+        <label for="passwordPlace">Password Required (Tap enter when done)</label>
+    </div></center></div>
+</div>
+
+<div style="height: 50px;" class=" indigo darken-4 nav-wrapper">
+    <table style="position: absolute;top:-17px;left:30px; width: 20%;">
+        <tr>
+            <td><img src="stuff/icons/logo.png"></td>
+            <td><h5 style="color: #fff;">FileServer</h5></td>
+        </tr>
+    </table>
+    <ul class="options">
+        <li title="copy selected file(s)" class="copy" onclick="copyClicked(this);"><img src="stuff/icons/Copy_25px.png"></li>
+        <li title="cut selected file(s)" class="cut"  onclick="cutClicked(this);"><img src="stuff/icons/Cut_25px.png"></li>
+        <li title="paste copied file(s)" class="paste" onclick="pasteClicked(this);"><img src="stuff/icons/Paste_25px.png"></li>
+        <li title="delete selected file(s)" class="delete" onclick="confirmDelete();"><img src="stuff/icons/Delete_25px.png"></li>
+        <li title="download selected file(s)" class="download" onclick="download();"><img src="stuff/icons/Download_25px.png"></li>
+    </ul>
+
+
+</div>
+
+<div class="modal" id="confirmMultipleDeleteModal">
+    <div class="modal-content confirmMultipleDeleteBody">
+
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="btn btn-flat waves-effect waves-purple modal-action modal-close" onclick="deleteSelectedFiles();">Yes</a>
+        <a href="#!" class="btn btn-flat waves-effect waves-purple modal-action modal-close">No</a>
+    </div>
+</div>
+
+
+
+<div class="row total" style="padding: 0px;margin: 0px">
+    <div class="col m3 xl3 l3 s12 card " style="margin: 0px;">
+        <ul class="collapsible" data-collapsible="accordion">
+            <li>
+                <div class="collapsible-header" style="">
+                    <table style="width: 50%;height:70%;padding:0px;margin:0px;">
+                        <tr>
+                            <td><img src="stuff/icons/HDD_24px_1.png"></td>
+                            <td>Drives</td>
+                          <img src="stuff/icons/refresh.png" height="15px" width="auto" class="right refreshDrivesButton" style="margin-top: 30px!important;cursor: pointer;" onclick="$('.refreshDrivesButton').addClass('spinner');refreshDrives();">
+                        </tr>
+                    </table>
+                </div>
+                <div class="collapsible-body">
+                    <ul class="me" style="padding: 0px;margin: 0px;">
+
+                    </ul>
+                </div>
+            </li>
+
+
+
+            <!--<li>
+                <div class="collapsible-header" style="">
+                    <table style="width: 50%;height:70%;">
+                        <tr>
+                            <td><img src="stuff/icons/admin.png"></td>
+                            <td>Administration</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="collapsible-body">
+                    <p>Input Administration password given on the server</p>
+
+                    <div class="input-field">
+                        <input id="password" type="password" width="95%"/>
+                        <label for="password">Password</label></div>
+                    <button class="btn waves-effect waves-purple right" style="background:  #1a237e;">Validate</button>
+                    <br>
+                    <br>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header" style="">
+                    <table style="width: 50%;height:70%;">
+                        <tr>
+                            <td><img src="stuff/icons/control.png"></td>
+                            <td>Screen_Control</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="collapsible-body">
+                    <p>This feature permits you to view the servers screen right from your browser and navigate.<br> It
+                        will only work if the server granted access</p>
+                    <button class="btn waves-effect waves-purple right recorderTrigger" style="background:  #1a237e;"
+                            onclick="$('#screenRecorderModal').modal('open');">Start
+                    </button>
+                    <br><br>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header" style="">
+                    <table style="width: 50%;height:70%;padding:0px;margin:0px;">
+                        <tr>
+                            <td><img src="stuff/icons/Filter_24px.png"></td>
+                            <td>Filter</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="collapsible-body">
+                    <ul class="collection filter" style="padding: 0px;margin: 0px;">
+                        <li class="collection-item">Images</li>
+                        <li class="collection-item ">Music</li>
+                        <li class="collection-item">Videos</li>
+                        <li class="collection-item">Documents</li>
+                        <li class="collection-item">Custom</li>
+                    </ul>
+                </div>
+            </li>-->
+        </ul>
+        <ul class="collection">
+            <a href="#!" class="collection-item" onclick="emptyholder()" title="click to deselect selected item(s)">Selected Items <span class="new badge selectedFilesValue">0</span></a>
+            <a href="#!" class="collection-item" onclick="emptyClipboard()" title="click to empty clipboard">Clipboard <span class="new badge clipboardValue">0</span></a>
+            <a href="#!" class="collection-item indicator">Current Operation: None</a>
+        </ul>
+
+        <center><div style="border: 2px dashed #1a237e; height: 50px; width: 100%;margin: 2% 4% 4% 0.5%;line-height: 50px;padding: 0!important;" class="dropme">
+            <center><h6 style="line-height: 50px;margin: 0!important;">Drop a file here</h6></center>
+        </div></center>
+
+    </div>
+    <div class="col m9 xl9 l9 s12 " style="height: 100%; overflow: auto;">
+        <table class="highlight" style="width: 100%;">
+            <thead>
+            <tr>
+                <th>
+
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Size
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Date Modified
+                </th>
+            </tr>
+            </thead>
+            <tbody class="body ">
+
+            <tr style="cursor: pointer;" onclick="window.location='http://www.tkctechnologies.rf.gd'">
+                <td colspan="5">
+                    <center style="margin-top: 10%;"><img src="stuff/icons/netIntro.png"/>
+                        <br>
+
+                        <h3>FILE SERVER
+                            <small style="font-style: italic;font-size: 15pt;">&nbsp;&nbsp;(Version 1.0.0 Alpha)</small>
+                        </h3>
+                        <br>
+                        <strong>&copy; Copyrights #tkctechonogies 2017</strong></center>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="collection menu" style="width:200px; display: none;">
+    <a href="#!" class="collection-item open"
+       onmousedown="if(event.button==0){load($('.open').attr('path'),$('.open').attr('type'));}"><strong>Open</strong></a>
+    <a class="collection-item " onmousedown="if(readWrite){if(event.button==0){$('#modal1').modal('open');
+                 var path = $('.open').attr('path');
+            }} else{Materialize.toast('Access Denied for read/write',3000);}">Rename</a>
+
+    <!--<a href="#!" class="collection-item" onmousedown="$('#mkdirmodal').modal('open');" class="mkdir">New folder</a>-->
+    <a href="#!" class="collection-item" onmousedown="if(readWrite){if(event.button==0){$('#modal2').modal('open');
+                 $('.pathshower').text($('.open').attr('path'));
+            }} else{Materialize.toast('Access Denied for read/write',3000);}">Delete</a>
+
+    <!-- Get props of the element ... method getProps in OgJs.js ..... :)  -->
+
+    <a href="#!" class="collection-item" onmousedown="getProps($('.open').attr('path'));$('#props').html(
+    '<center><div class=\'turn\' style=\'border:5px solid transparent;border-left: 5px solid #1a237e; width: 50px;height:50px;border-radius: 50%;\'></div></center><br><p><b>Please wait</b> while we try to gather information about the file/folder... <br> If this takes too long(more than 40 seconds), then access should propbably be restricted by the <b>Remote pc</b> <br> ' +
+     'Betterstill, verify connectivity to the <b>Remote host</b><br><a href=\'#!\'>Find out more..</a></p>'
+    );$('#propsmodal').modal('open');">Properties</a>
+
+
+</div>
+
+<div id="mkdirmodal" class="modal">
+    <div class="modal-content">
+        <h4>Create new folder</h4>
+
+        <p>Input the ne name for the folder in the field below</p>
+        <input type="text" id="mkdir" onfocus="$('#mkdirlabel').fadeIn()" required onkeyup="mkdirindicate()"/>
+        <label for="mkdir" id="mkdirlabel" style="display:none;">Folder Name (without /,\,&lt;,&gt;,*,?,:)</label>
+
+        <p class="showmeMkdir"></p>
+    </div>
+    <div class="modal-footer">
+        <a class="modal-close modal-action btn-flat waves-effect waves-green"
+           onmousedown="mkdirNow($('.open').attr('path'),$('#mkdir').val());">Create</a>
+        <a class="modal-close modal-action btn-flat waves-effect waves-green"
+           onmousedown="$('.showmeMkdir').text('');$('#mkdir').val('');">Quit</a>
+    </div>
+</div>
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4>Rename File
+            <small class="moname"></small>
+        </h4>
+        <form class="input-field" role="form">
+            <input type="text" id="rename" onfocus="$('#renamelabel').fadeIn()" required onkeyup="indicate()"/>
+            <label for="rename" id="renamelabel" style="display:none;">New Name (without /,\,&lt;,&gt;,*,?,:,|)</label>
+        </form>
+        <p class="showme"></p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat"
+           onmousedown="rename($('.open').attr('path'),$('#rename').val());">RENAME</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat"
+           onmousedown="$('.showme').text('');">QUIT</a>
+    </div>
+</div>
+<div id="modal2" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to delete &nbsp;&nbsp;<strong class="pathshower"></strong></p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat"
+           onmousedown="deletefile($('.open').attr('path'));">i'M SURE</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">NO</a>
+    </div>
+</div>
+<div id="modaler" class="modal">
+    <input type="hidden" class="hiddeninput">
+
+    <div class="modal-content">
+        <p class="descriptivetext"> Selecting images from div</p>
+
+        <div class="loadDrivesMassa">
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class=" modal-action modal-close waves-effect waves-teal btn-flat">Quit</a>
+        <a href="#" class=" modal-action modal-close waves-effect waves-teal btn-flat" onclick="sendFinal()">Filter
+            Now</a>
+    </div>
+</div>
+<div class="cover"
+     style="position:absolute;border:1px solid red;background-color: rgba(255,0,0,0.2);width: 0px;height: 0px;"></div>
+<div class="modal" id="imageViewer" style="background-color: #1a237e;max-height: 85%;margin-top:1%;">
+    <div class="modal-content">
+        <h4 style="color:white;font-family: 'Century Gothic'">Image Viewer</h4>
+        <br>
+        <center>
+            <img class="imageViewer" style="max-height: 500px;max-width: 500px;"></center>
+        <br>
+    </div>
+    <div class="modal-footer" style="background-color: #1a237e;">
+        <a href="#" class=" modal-action modal-close waves-effect waves-red btn-flat" style="color:white; ">Close</a>
+    </div>
+</div>
+<div class="z-depth-4 audiodiv" style="position: absolute; top: 10px;left:10px;background-color: #fff;height:33px;"
+     hidden oncontextmenu="return false">
+    <img src="stuff/icons/move.png" height="20" width="20" style="position: relative;top:-5px ;"/>
+    <audio controls id="audio" autoplay>
+        <source id="audioPlayer" src="">
+        <h5>Your browser can't support this! sorry...</h5>
+    </audio>
+    <div>
+
+    </div>
+</div>
+<div ondblclick="pauseVid()" class="z-depth-4 videodiv"
+     style="position: absolute;top:10%;left:10%;background-color: #1a237e;padding-bottom:-5px; margin-bottom:-10px; background-color: #fafafa"
+     hidden>
+    <video controls id="video" style="background-color: #1a237e;" autoplay>
+        <source id="videoPlayer" src="" style="background-color: #1a237e;">
+        <h5>Your browser can't support this! sorry...</h5>
+    </video>
+</div>
+
+
+<!-- modal for properties-->
+
+
+<div class="modal" id="propsmodal">
+    <div class="modal-content" id="props">
+
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close modal-action btn btn-flat waves-effect waves-purple sticky-action">Close</a>
+    </div>
+</div>
+
+<!-- MOdal for paste confirmation   -->
+<div class="modal" id="pasteconfirmmodal">
+    <div class="modal-content">
+        <h5>What should be done when the file is already present?</h5>
+        <p>
+            <input name="pasteconfirm" type="radio" id="overwrite" onmousedown="operationType='or'" />
+            <label for="overwrite">Overwrite already present file(s)</label>
+        </p>
+        <p>
+            <input name="pasteconfirm" type="radio" id="skip"  onmousedown="operationType='sk'" checked />
+            <!-- sk = skip operation-->
+            <label for="skip">Skip operation the duplicated file and continue</label>
+        </p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close modal-action btn btn-flat waves-effect waves-purple sticky-action" onclick="actualPaste()">Proceed</a>
+        <a href="#!" class="modal-close modal-action btn btn-flat waves-effect waves-purple sticky-action">Quit</a>
+    </div>
+</div>
+<div class="card pastenotification" style="position: fixed;bottom: 0;left:1%;padding: 2%;" hidden>
+    <img src="stuff/icons/refresh.png" height="20px" width="auto" class="left  spinner" style="cursor: wait;">
+    &nbsp;&nbsp;Pasting file(s) ....
+</div>
+<div class="card delnotification" style="position: fixed;bottom: 0;left:1%;padding: 2%;" hidden>
+    <img src="stuff/icons/refresh.png" height="20px" width="auto" class="left  spinner" style="cursor: wait;">
+    &nbsp;&nbsp;Deleting file(s) ....
+</div>
+<div class="modal" id="dropModalInfo">
+    <div class="modal-content">
+        <h5>Information:</h5>
+        <h6>Sorry but the requested operation is not integrated in this version. You shall have access to this operation when you download the next version of file server</h6>
+    </div>
+    <div class="modal-footer"><a class="modal-close btn btn-flat waves-red waves-effect">OK!</a></div>
+</div>
+<div class="modal" id="downloadModal">
+    <div class="modal-content">
+     <div style="width: 100%" class="downloadModalMain">
+         <center><div class='circle turn' style='border:5px solid transparent;border-left: 5px solid #1a237e; width: 100px;height:100px;'></div></center>
+     </div>
+        </div>
+    <div class="modal-footer" id="dmf" hidden><a class="modal-close btn btn-flat waves-red waves-effect" href="#!" onclick="downloadInit()">OK!</a></div>
+</div>
+<div class="slave" id="slave" hidden></div>
+<script>
+    $('.clicker').click(function () {
+        alert('j');
+    });
+
+
+    $(document).ready(function () {
+        // $('.videodiv').draggable();
+        $('.modal').modal({
+            dismissible: false
+        });
+        var h = $(window).height() - 50;
+        $('.total').height(h);
+        //  document.addEventListener('mousedown', refreshClicks);
+        //loadDrivesMassa();
+
+    });
+    $(window).resize(function () {
+        var h = $(window).height() - 50;
+        $('.total').height(h);
+    });
+    $('.filter >li').click(function () {
+
+        $('#modaler').modal('open');
+        var text = $(this).text();
+        if (text == 'Images') {
+            $('.hiddeninput').text("0");
+            $('.descriptivetext').text("Select the drive(s) to filter Images from");
+        }
+        else if (text == "Music") {
+            $('.hiddeninput').text("1");
+            $('.descriptivetext').text("Select the drive(s) to filter Musics from");
+        }
+        else if (text == "Videos") {
+            $('.hiddeninput').text("2");
+            $('.descriptivetext').text("Select the drive(s) to filter Videos from");
+        }
+        else if (text == "Documents") {
+            $('.hiddeninput').text("3");
+            $('.descriptivetext').text("Select the drive(s) to filter Documents from");
+        }
+        else if (text == "Custom") {
+            $('.hiddeninput').text("4");
+            $('.descriptivetext').text("Select the drive(s) to filter from");
+        }
+    });
+
+
+</script>
+</body>
+</html>
+

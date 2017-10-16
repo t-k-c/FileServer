@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Upload Form</title>
+    <script src="stuff/js/jquery.min.js"></script>
+    <script src="stuff/js/jquery-ui.min.js"></script>
+    <script src="stuff/js/frwrkMlise.js"></script>
+    <script type="text/javascript">
+        function submitForm() {
+            console.log("waiting...");
+            event.preventDefault();
+          //  console.log("submit event");
+            var fd = new FormData(document.getElementById("fileinfo"));
+            fd.append("label", "WEBUPLOAD");
+            var file = document.getElementById("file").files[0];
+         //   alert(file.name+" "+file.size+" "+file.type);
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+
+                };
+               //
+                //
+               // console.log(file);
+           var fr = new  FileReader();
+            fr.readAsDataURL(file);
+            fr.onloadend=function(){
+              console.log();
+              xhttp.open("GET",fr.result, true);
+              xhttp.send();
+            };
+        }
+    </script>
+</head>
+
+<body>
+<form method="post" id="fileinfo" name="fileinfo" onsubmit="submitForm();" enctype="multipart/form-data">
+    <label>Select a file:</label><br>
+    <input type="file" name="file" id="file" required/>
+    <input type="submit" value="Upload" />
+</form>
+<div id="output"></div>
+</body>
+</html>
