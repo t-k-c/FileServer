@@ -171,12 +171,11 @@ function load(url, type) {
        var downloadPath = "/a010101110011010110011011" + removehashtag(url.replace(":", "c001100900345711010n"))+"/a010101110011010110011011";
         var anchor = document.createElement('a');
         anchor.href = downloadPath;
-        anchor.download = url;
+        anchor.download = decr(url);
         anchor.target = '_blank';
         anchor.click();
     }
     else {
-
         current = url;
         var getter = "a010101110011010110011011" + encodeURI(removehashtag(url)).replace(":", "c001100900345711010n") + ".1j1s1o1n1";
         console.log(getter);
@@ -269,7 +268,7 @@ function folderClick(url, type, event) {
             var ThePath = "/a010101110011010110011011" + url.replace(":", "c001100900345711010n")+"/a010101110011010110011011";
             var anchor = document.createElement('a');
             anchor.href = ThePath;
-            anchor.download = url;
+            anchor.download = decr(url);
             anchor.target = '_blank';
             anchor.click();
         }
@@ -503,7 +502,7 @@ function mkdirNow(path, folderName) {
 
 function mediaClick(url, type, mediaType, event) {
     emptyholder();
-    url = url.replace("ee903467tghjadeqew143tafgcnomanvuyd65622335110001191928752645", "\'");
+    url = url.split("ee903467tghjadeqew143tafgcnomanvuyd65622335110001191928752645").join("\'");
     console.log(url);
     if (event.button == 2) {
         var split = url.split('\\');
@@ -1002,11 +1001,11 @@ function download() {
     }
 }
 function downloadInit(){
-    var downloadPath = '/FileServerDownload.zip'
+    var downloadPath = '/FileServerDownload.zip'+"/a010101110011010110011011"
     ;//mass_download_url;
     var anchor = document.createElement('a');
     anchor.href = downloadPath;
-    anchor.download = url;
+    anchor.download = 'FileServer'+Math.random()+'.zip';
     anchor.target = '_blank';
     anchor.click();
 }

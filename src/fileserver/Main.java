@@ -52,6 +52,8 @@ public class Main{static HttpServer httpServer=null;
                     System.out.println("String  "+fileString);
                     if("/".equals(fileString)||"//".equals(fileString))
                         fileString="\\index.html";
+                    if("/favicon.ico".equals(fileString))
+                        fileString = "\\favicon.png";
                     // fileString=httpExchange.getRequestURI().toString().replace("243wqs4wdwe67213erdfcxsvbdc128930649137ehgkajbczcxvnm164213e30","#");
                     if(! new Mime(fileString.replace("\\","")).getExt().equals("1j1s1o1n1")&&
                             ! new Mime(fileString.replace("\\","")).getExt().equals("1r1e1n1a1m1e1")&&

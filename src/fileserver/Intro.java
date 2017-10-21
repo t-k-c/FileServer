@@ -96,6 +96,8 @@ public class Intro extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("FileServer");
+        setIconImage((new javax.swing.ImageIcon(getClass().getResource("/fileserver/FSLogo.png"))).getImage());
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

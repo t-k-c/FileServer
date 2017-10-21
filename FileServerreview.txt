@@ -1,17 +1,13 @@
-reviews!!!File Server
-          uploading files
-          the remaining pages (ABOUT,HELP,Settings should take action.....);
-*********************************************************************************constant check for accesibility of drives
-*********************************************************************************music files.....extension
-problem with file renaming....
-Pasting of files
-Downloading of multiple files
-Go detaily into files with restricted access like F:/Recovery...
-                                                     Ip addresses and their interfaces....
-                                                     **********************************************************************************Make the audio and video player draggable...
-                                                     **********************************************************************************music files icon
-=================================================================================
-**********************************************************************************Drives should have but a refresh button which will refresh all plus accessibility
-=================================================================================
-
-**********************************************************************************mistakes made in opening a directory confused with loadDrives();  //Version Beta
+FileServer 1.0 Test Version Powered By tkctechnologies
+******************************************************
+Welcome to FileServer, the application which gives you the possibility and ability to share your files easily. 
+This version is the very first release of FileServer and is available only in english. Better, performant, and robust features
+will be delivered to you as it updates.
+For any errors / bugs encountered during installation & usage of this software, please report on the fileserver bug platform. 
+For more information contact,
+Company : tkctechnologies
+tel : +(237)696076817 
+Location : Yaounde Cameroon
+Website : http://www.tkctechnologies.tk/
+tkctechnologies is glad to have you onboard... 
+Enjoy ... 

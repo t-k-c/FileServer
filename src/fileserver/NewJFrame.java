@@ -49,6 +49,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage((new javax.swing.ImageIcon(getClass().getResource("/fileserver/FSLogo.png"))).getImage());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel1.setText("                                                  #tkctehnologies");

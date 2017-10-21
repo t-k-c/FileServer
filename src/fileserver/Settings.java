@@ -66,6 +66,7 @@ public class Settings extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage((new javax.swing.ImageIcon(getClass().getResource("/fileserver/FSLogo.png"))).getImage());
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -350,7 +351,8 @@ int dx,dy,fx,fy,x,y;
          // TODO add your handling code here:
         SettingsManager.echo("click");
         if(SettingsManager.readSetting(SettingsManager.AUTH_ACCESS).equals(SettingsManager.AUTH_ACCESS_TRUE)){
-            if(SettingsManager.setAuthAccess(false,null)){ jLabel6.setIcon(new ImageIcon(getClass().getResource(toggleButtonOff)));
+            if(SettingsManager.setAuthAccess(false,null))
+            { jLabel6.setIcon(new ImageIcon(getClass().getResource(toggleButtonOff)));
              jTextField2.setEditable(true);
             }
             else notify("An unknown error occurred");

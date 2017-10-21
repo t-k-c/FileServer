@@ -76,6 +76,7 @@ public class Connections extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Connections");
+        setIconImage((new javax.swing.ImageIcon(getClass().getResource("/fileserver/FSLogo.png"))).getImage());
         setLocationByPlatform(true);
         setUndecorated(true);
         setType(java.awt.Window.Type.POPUP);

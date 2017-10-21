@@ -26,7 +26,7 @@ and open the template in the editor.
 <div style="height: 50px;" class=" indigo darken-4 nav-wrapper">
     <table style="position: absolute;top:-17px;left:30px; width: 20%;">
         <tr>
-            <td><img src="stuff/icons/logo.png"></td>
+            <td><img src="stuff/icons/netIntro.png" height="24px" width="auto" style="margin-top: 5px;"></td>
             <td><h5 style="color: #fff;">FileServer</h5></td>
         </tr>
     </table>
@@ -167,16 +167,20 @@ and open the template in the editor.
             </thead>
             <tbody class="body ">
 
-            <tr style="cursor: pointer;" onclick="window.location='http://www.tkctechnologies.rf.gd'">
+            <tr style="cursor: pointer;" onclick="var anchor = document.createElement('a');
+anchor.target = '_blank';
+anchor.href = 'http://tkctechnologies.tk/';
+anchor.click();
+">
                 <td colspan="5">
-                    <center style="margin-top: 10%;"><img src="stuff/icons/netIntro.png"/>
+                    <center style="margin-top: 10%;"><img src="stuff/icons/netIntro.png" height="100px" width="auto"/>
                         <br>
 
                         <h3>FILE SERVER
                             <small style="font-style: italic;font-size: 15pt;">&nbsp;&nbsp;(Version 1.0.0 Alpha)</small>
                         </h3>
                         <br>
-                        <strong>&copy; Copyrights #tkctechonogies 2017</strong></center>
+                        <strong>&copy; Copyrights #tkctechonologies 2017</strong></center>
                 </td>
             </tr>
             </tbody>
